@@ -1,4 +1,5 @@
 export const WIN_COST = 10;
+export const SIZE_FIELD = 6;
 
 export const SUN_POSITION_TOP = 0;
 export const SUN_POSITION_RIGHT = 1;
@@ -37,4 +38,4 @@ export const energy = {
     CELL_CONTENT_SMALL: 1,
     CELL_CONTENT_MEDIUM: 2,
     CELL_CONTENT_LARGE: 3
-}
+};
