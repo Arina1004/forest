@@ -25,7 +25,7 @@ export class Environment {
     }
 
     addPlayer(name) {
-        this.players.push(new Player(name));
+        this.players.push(name);
     }
 
     buyTree(type, player) {
@@ -124,7 +124,7 @@ export class Environment {
         for (let y = 0; y < SIZE_FIELD; y++){
             for (let x = 0; x < SIZE_FIELD; x++){
                 if (this.field.content[x][y].type != CELL_CONTENT_EMPTY && shadowedCells.filter(cell => cell.x === x && cell.y === y).length > 0) {
-                    const player = this.field.content[x][y].player; 
+                    const player = this.field.content[x][y].player;
                     this.players[player].energy += energy[this.field.content[x][y].type]
                 }
             }
@@ -137,7 +137,7 @@ export class Environment {
             console.log(player);
             const actions = player.algorithm(this.field, player.id, player.getParams(), this.mode, this.sun);
             for (let action of actions) {
-                doAction(action, player);
+                this.doAction(action, player);
             }
             if (player.points >= 10) {
                 return player.id;
