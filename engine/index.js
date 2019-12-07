@@ -1,6 +1,7 @@
-import { Field } from './field';
+import { Environment } from './environment';
 console.log('Hello from engien');
 
-const field = new Field();
-console.log(field.content);
+const environment = new Environment();
 
+const playerCode = () => console.log('Algrorithm');
+environment.addPlayer(playerCode);
