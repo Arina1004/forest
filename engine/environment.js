@@ -18,11 +18,21 @@ export class Environment {
         this.players = [];
         this.tick = 0;
         this.sun = 0;
-        this.blockedCells = [];
     }
 
     addPlayer(name) {
         this.players.push(new Player(name));
+    }
+
+    buyTree(type, player) {
+        if (this.players[player].store.get(type) > 0) {
+            const price = prices[type];
+            if (this.players[player].energy - price > 0) {
+                this.players[player].store.dec(type);
+                this.players[player].inventory.inc(type);
+                this.players[player].energy -= price;
+            }
+        }
     }
 
     plantSeed(x, y, parent, player) {
@@ -35,7 +45,7 @@ export class Environment {
         ) {
             const radius = plantRadius[parent.type];
 
-            if (Math.abs(x - parent.x) <= radius && Math.abs(y - parent.y) <= radius) {
+            if (Math.abs(x - parent.x) <= radius && Math.abs(y - parent.y) <= radius && ) {
                 if (this.players[player].energy >= prices[CELL_CONTENT_SEED]) {
                     this.players[player].energy -= prices[CELL_CONTENT_SEED];
                     this.players[player].inventory.inc(CELL_CONTENT_SEED);
@@ -72,7 +82,8 @@ export class Environment {
 
     initTree(x, y, player) {
         if (this.field.content[y][x].type === CELL_CONTENT_EMPTY &&
-            this.players[player].inventory.get(nextUpdate[CELL_CONTENT_SEED]) > 0) {
+            this.players[player].inventory.get(nextUpdate[CELL_CONTENT_SEED]) > 0
+            && getFertility(x, y) === 1) {
             this.field.content[y][x].set(nextUpdate[CELL_CONTENT_SEED], x, y, player);
             this.players[player].inventory.dec(nextUpdate[CELL_CONTENT_SEED]);
 
@@ -139,6 +150,15 @@ export class Environment {
 
             default:
                 break;
+        }
+    }
+
+    getState(){
+        return {
+            field: this.field,
+            sun: this.sun,
+            players: this.players,
+            tick: this.tick
         }
     }
 }
