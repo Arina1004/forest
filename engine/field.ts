@@ -1,2 +1,2 @@
-import { Tree } from './tree';
+import { Cell } from './cell';
 export class Field {}
