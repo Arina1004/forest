@@ -26,17 +26,15 @@ class Environment {
     }
 
     plantSeed(x, y, parent, player) {
-        if (
-            parent.type != CELL_CONTENT_SEED &&
-            parent.type != CELL_CONTENT_EMPTY &&
-            this.field.content[y][x].type === CELL_CONTENT_EMPTY &&
-            player === parent.player
-        ) {
+        if (parent.type != CELL_CONTENT_SEED && parent.type != CELL_CONTENT_EMPTY
+            && this.field.content[y][x].type === CELL_CONTENT_EMPTY && player === parent.player
+            && this.players[player].inventory.get(CELL_CONTENT_SEED) > 0) {
             const radius = plantRadius[parent.type];
 
             if (Math.abs(x - parent.x) <= radius && Math.abs(y - parent.y) <= radius) {
-                if (this.players[parent.player].energy >= prices[CELL_CONTENT_SEED]) {
-                    this.players[parent.player].energy -= prices[CELL_CONTENT_SEED];
+                if (this.players[player].energy >= prices[CELL_CONTENT_SEED]) {
+                    this.players[player].energy -= prices[CELL_CONTENT_SEED];
+                    this.players[player].inventory.inc(CELL_CONTENT_SEED);
 
                     this.field.content[y][x].set(CELL_CONTENT_SEED, x, y, player);
 
@@ -49,11 +47,11 @@ class Environment {
     }
 
     upgrade(x, y, player) {
-        if (
-            this.field.content[y][x].type != CELL_CONTENT_EMPTY &&
-            this.players[player].energy >= upgrades[nextUpdate[this.field.content[y][x].type]]
-        ) {
+        if (this.field.content[y][x].type != CELL_CONTENT_EMPTY && this.players[player].energy >= upgrades[nextUpdate[this.field.content[y][x].type]] && this.players[player].inventory.get(nextUpdate[this.field.content[y][x].type]) > 0 && this.field.content[y][x].player === player) {
             this.players[player].energy -= upgrades[nextUpdate[this.field.content[y][x].type]];
+
+            this.players[player].store.inc(this.field.content[y][x].type);
+            this.players[player].inventory.dec(nextUpdate[this.field.content[y][x].type]);
 
             this.field.content[y][x].set(nextUpdate[this.field.content[y][x].type], x, y, player);
 
@@ -64,8 +62,9 @@ class Environment {
     }
 
     sell(x, y, player) {
-        if (this.field.content[y][x].type === CELL_CONTENT_LARGE && this.players[player].energy >= POINT_COST) {
+        if (this.field.content[y][x].type === CELL_CONTENT_LARGE && this.players[player].energy >= POINT_COST && this.field.content[y][x].player === player) {
             this.players[player].energy -= POINT_COST;
+            this.players[player].store.inc(CELL_CONTENT_LARGE);
 
             this.players[player].points += getFertility(x, y);
 
