@@ -3,6 +3,7 @@ import './PlayerPanel.scss';
 
 const PlayerPanel = ({ card }) => (
     <div className="playerPanel-root">
+        {console.log(card)}
         <h1 className="playerPanel-title">{`PLAYER № ${card.player}`}</h1>
         <div className="resourses">
             <h2 className="playerPanel-title-h2">SHOP</h2>

@@ -9,7 +9,7 @@ const Layout = () => {
     return <div>
         <div className="layout-root">
             <Field content={environment.getState().field} />
-            {/* <PlayersPanel cards={environment.getState().players} /> */}
+            <PlayersPanel cards={environment.getState().players} />
         </div>
         <div className="layout-button-root">
             <button className="layout-button" onClick={() => environment.step()}>Step</button>
