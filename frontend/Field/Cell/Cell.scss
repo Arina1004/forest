@@ -1,0 +1,22 @@
+.cell-root {
+    width: 100px;
+    height: 100px;
+    background: aqua;
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+
+.cell-fertility-low {
+    background-image: url('../../../assets/ground/ground3.jpg');
+    background-size: contain;
+}
+
+.cell-fertility-mean {
+    background-image: url('../../../assets/ground/ground2.jpg');
+    background-size: contain;
+}
+
+.cell-fertility-high {
+    background-image: url('../../../assets/ground/ground1.jpg');
+    background-size: contain;
+}
