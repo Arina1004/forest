@@ -70,7 +70,17 @@ export class Environment {
         return 'ERROR';
     }
 
-    initTree(x, y, palyer) {}
+    initTree(x, y, player) {
+        if (this.field.content[y][x].type === CELL_CONTENT_EMPTY &&
+            this.players[player].inventory.get(nextUpdate[CELL_CONTENT_SEED]) > 0) {
+            this.field.content[y][x].set(nextUpdate[CELL_CONTENT_SEED], x, y, player);
+            this.players[player].inventory.dec(nextUpdate[CELL_CONTENT_SEED]);
+
+            return "COMPLETE"
+        }
+
+        return "ERROR"
+    }
 
     sell(x, y, player) {
         if (
@@ -107,19 +117,19 @@ export class Environment {
         // action ={name: func,params:{}}
         switch (action.name) {
             case 'sell':
-                sell(action.params, player);
+                this.sell(action.params.x, action.params.y, player);
                 break;
 
             case 'upgrade':
-                upgrade(action.params, player);
+                this.upgrade(action.params.x, action.params.y, player);
                 break;
 
             case 'plantSeed':
-                upgrade(action.params, player);
+                this.plantSeed(action.params.x, action.params.y, action.params.parent, player);
                 break;
 
             case 'initTree':
-                initTree(action.params, player);
+                this.initTree(action.params.x, action.params.y, player);
 
             default:
                 break;
