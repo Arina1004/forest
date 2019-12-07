@@ -8,9 +8,11 @@ import {
     prices,
     nextUpdate,
     upgrades,
-    CELL_CONTENT_LARGE
+    CELL_CONTENT_LARGE,
+    SIZE_FIELD,
+    energy
 } from '../types/enums';
-import { getFertility } from '../types/function';
+import { getFertility, getShadow } from '../types/function';
 
 export class Environment {
     constructor() {
@@ -113,6 +115,17 @@ export class Environment {
     }
 
     step() {
+        let shadowedCells = getShadow(this.field, this.sun);
+
+        for (let y = 0; y < SIZE_FIELD; y++){
+            for (let x = 0; x < SIZE_FIELD; x++){
+                if (this.field.content[x][y].type != CELL_CONTENT_EMPTY && shadowedCells.filter(cell => cell.x === x && cell.y === y).length > 0) {
+                    const player = this.field.content[x][y].player; 
+                    this.players[player].energy += energy[this.field.content[x][y].type]
+                }
+            }
+        }
+
         for (let player of this.players) {
             // actions =[{action: func,params:{}}]
             const actions = player.algorithm(this.field, player.getParams());
