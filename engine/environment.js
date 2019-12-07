@@ -1,6 +1,15 @@
 import { Field } from './field';
 import { Player } from './player';
-import { POINT_COST, CELL_CONTENT_EMPTY, plantRadius, CELL_CONTENT_SEED, prices, nextUpdate, upgrades, CELL_CONTENT_LARGE } from '../types/enums';
+import {
+    POINT_COST,
+    CELL_CONTENT_EMPTY,
+    plantRadius,
+    CELL_CONTENT_SEED,
+    prices,
+    nextUpdate,
+    upgrades,
+    CELL_CONTENT_LARGE
+} from '../types/enums';
 import { getFertility } from '../types/function';
 
 class Environment {
@@ -9,16 +18,20 @@ class Environment {
         this.players = [];
         this.tick = 0;
         this.sun = 0;
-        this.blockedCells = []
+        this.blockedCells = [];
     }
 
     addPlayer(name) {
-        this.players.push(new Player(name))
+        this.players.push(new Player(name));
     }
 
-    plantSeed(x, y, player, parent) {
-        if (parent.type != CELL_CONTENT_SEED && parent.type != CELL_CONTENT_EMPTY
-            && this.field.content[y][x].type === CELL_CONTENT_EMPTY && player === parent.player) {
+    plantSeed(x, y, parent, player) {
+        if (
+            parent.type != CELL_CONTENT_SEED &&
+            parent.type != CELL_CONTENT_EMPTY &&
+            this.field.content[y][x].type === CELL_CONTENT_EMPTY &&
+            player === parent.player
+        ) {
             const radius = plantRadius[parent.type];
 
             if (Math.abs(x - parent.x) <= radius && Math.abs(y - parent.y) <= radius) {
@@ -27,26 +40,28 @@ class Environment {
 
                     this.field.content[y][x].set(CELL_CONTENT_SEED, x, y, player);
 
-                    return "COMPLETE"
+                    return 'COMPLETE';
                 }
             }
         }
 
-        return "ERROR"
+        return 'ERROR';
     }
 
     upgrade(x, y, player) {
-        if (this.field.content[y][x].type != CELL_CONTENT_EMPTY && this.players[player].energy >= upgrades[nextUpdate[this.field.content[y][x].type]]) {
+        if (
+            this.field.content[y][x].type != CELL_CONTENT_EMPTY &&
+            this.players[player].energy >= upgrades[nextUpdate[this.field.content[y][x].type]]
+        ) {
             this.players[player].energy -= upgrades[nextUpdate[this.field.content[y][x].type]];
 
             this.field.content[y][x].set(nextUpdate[this.field.content[y][x].type], x, y, player);
 
-            return "COMPLETE"
+            return 'COMPLETE';
         }
 
-        return "ERROR"
+        return 'ERROR';
     }
-
 
     sell(x, y, player) {
         if (this.field.content[y][x].type === CELL_CONTENT_LARGE && this.players[player].energy >= POINT_COST) {
@@ -56,18 +71,38 @@ class Environment {
 
             this.field.content[y][x].set(CELL_CONTENT_EMPTY, x, y);
 
-            return "COMPLETE"
+            return 'COMPLETE';
         }
 
-        return "ERROR"
+        return 'ERROR';
     }
 
-	step() {
+    step() {
         for (let player of this.players) {
-            const action = player.algorithm(this.field, player.getParams());
+            // actions =[{action: func,params:{}}]
+            const actions = player.algorithm(this.field, player.getParams());
+            for (let action of actions) {
+                doAction(action, player);
+            }
         }
         this.tick = this.tick + 1;
         this.sun = (this.sun + 1) % 4;
     }
 
+    doAction(action, player) {
+        // action ={name: func,params:{}}
+        switch (action.name) {
+            case 'sell':
+                sell(action.params, player);
+                break;
+            case 'upgrade':
+                upgrade(params, player);
+                break;
+            case 'plantSeed':
+                upgrade(params, player);
+                break;
+            default:
+                break;
+        }
+    }
 }
