@@ -10,8 +10,8 @@ class Environment {
         this.sun = 0;
     }
 
-    addPlayer(callbackStep){
-
+    addPlayer(name){
+        this.players.push(new Player(name))
     }
 
 

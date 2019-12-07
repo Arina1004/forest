@@ -1,13 +1,11 @@
-import { SIZE_FIELD,SUN_POSITION_TOP,SUN_POSITION_RIGHT,SUN_POSITION_BOTTOM, SUN_POSITION_LEFT,CELL_CONTENT_SEED,CELL_CONTENT_SMALL,CELL_CONTENT_MEDIUM,CELL_CONTENT_LARGE} from '../types/enums';
+import { SIZE_FIELD, shadows, SUN_POSITION_TOP, SUN_POSITION_RIGHT, SUN_POSITION_BOTTOM, SUN_POSITION_LEFT } from '../types/enums';
 export const SIZE_FIELD = 6;
 export function getFertility(x, y) {
-  if (x <= 3 a && x >= 2 && y <= 3 a && y >= 2)
-  {
+  if (x <= 3 && x >= 2 && y <= 3 && y >= 2) {
     return 3;
 
   }
-  else if (y = 0 || x = 0 || y =5 || x = 5 )
-  {
+  else if (y === 0 || x === 0 || y === 5 || x === 5) {
     return 1;
 
   }
@@ -17,94 +15,54 @@ export function getFertility(x, y) {
 }
 
 export function getShadow(field, sun) {
-for (let x = 0; x < SIZE_FIELD; x++){
-  for (let y = 0; y < SIZE_FIELD; y++){
-    if sun === SUN_POSITION_TOP{
-      if (field.content[y][x].type ===CELL_CONTENT_SEED){
-        return;
+  const res = [];
 
+  for (let x = 0; x < SIZE_FIELD; x++) {
+    for (let y = 0; y < SIZE_FIELD; y++) {
+      if (shadows[field.content[y][x].type] > 0) {
+        let shadowsLeft = shadows[field.content[y][x].type];
+
+        if (sun === SUN_POSITION_TOP) {
+          for (let i = y + 1; i < 6 && shadowsLeft > 0; i++) {
+            res.push({
+              x: x,
+              y: i
+            });
+
+            shadowsLeft -= 1;
+          }
+        }
+        else if (sun === SUN_POSITION_BOTTOM) {
+          for (let i = y - 1; i >= 0 && shadowsLeft > 0; i--) {
+            res.push({
+              x: x,
+              y: i
+            });
+
+            shadowsLeft -= 1;
+          }
+        }
+        else if (sun === SUN_POSITION_LEFT) {
+          for (let i = x + 1; i < 6 && shadowsLeft > 0; i++) {
+            res.push({
+              x: i,
+              y: y
+            });
+
+            shadowsLeft -= 1;
+          }
+        }
+        else if (sun === SUN_POSITION_RIGHT) {
+          for (let i = x - 1; i >= 0 && shadowsLeft > 0; i--) {
+            res.push({
+              x: i,
+              y: y
+            });
+
+            shadowsLeft -= 1;
+          }
+        }
       }
-
-      else if (field.content[y][x].type ===CELL_CONTENT_LARGE){
-        return;
-
-      }
-      else if (field.content[y][x].type ===CELL_CONTENT_MEDIUM){
-        return;
-
-      }
-      else if (field.content[y][x].type ===CELL_CONTENT_SMALL)
-      {
-        return;
-      }
-      return [];
-
     }
-  else if sun === SUN_POSITION_RIGHT{
-    if (field.content[y][x].type ===CELL_CONTENT_SEED){
-      return;
-
-    }
-
-    else if (field.content[y][x].type ===CELL_CONTENT_LARGE){
-      return;
-
-    }
-    else if (field.content[y][x].type ===CELL_CONTENT_MEDIUM){
-      return;
-
-    }
-    else if (field.content[y][x].type ===CELL_CONTENT_SMALL)
-      {
-        return;
-      }
-      return [];
   }
-
-  }
-  else if sun === SUN_POSITION_BOTTOM {
-    if (field.content[y][x].type ===CELL_CONTENT_SEED){
-      return;
-
-    }
-
-    else if (field.content[y][x].type ===CELL_CONTENT_LARGE){
-      return;
-
-    }
-    else if (field.content[y][x].type ===CELL_CONTENT_MEDIUM){
-      return;
-
-    }
-    else if (field.content[y][x].type ===CELL_CONTENT_SMALL)
-      {
-        return;
-      }
-      return [];
-
-
-  }
-
-      }
-  else
-  {
-    if (field.content[y][x].type ===CELL_CONTENT_SEED){
-
-    }
-
-    else if (field.content[y][x].type ===CELL_CONTENT_LARGE){
-
-    }
-    else if (field.content[y][x].type ===CELL_CONTENT_MEDIUM){
-
-    }
-    else if (field.content[y][x].type ===CELL_CONTENT_SMALL)
-      {
-        return;
-      }
-      return [];
-
-  }
-
 }
-
