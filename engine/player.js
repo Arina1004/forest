@@ -20,17 +20,6 @@ export class Player {
         this.inventory = new Item('inventory');
     }
 
-    buyTree(type) {
-        if (this.store.get(type) > 0) {
-            const price = prices[type];
-            if (this.energy - price > 0) {
-                this.store.dec(type);
-                this.inventory.inc(type);
-                this.energy = this.energy - price;
-            }
-        }
-    }
-
     getParams() {
         return {
             points: this.points,
