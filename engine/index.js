@@ -4,7 +4,7 @@ console.log('Hello from engien');
 
 const environment = new Environment();
 
-const algorithm = (field, player, params, mode, sun) => {
+const algorithm1 = (field, player, params, mode, sun) => {
     const actions = [];
 
     if (mode === 'INIT') {
@@ -15,9 +15,22 @@ const algorithm = (field, player, params, mode, sun) => {
 
     return actions;
 };
+const algorithm2 = (field, player, params, mode, sun) => {
+    const actions = [];
 
-const player = new Player(0, algorithm);
-environment.addPlayer(player);
+    if (mode === 'INIT') {
+        actions.push({ name: 'initTree', params: { x: 1, y: 6 } });
+    } else {
+        actions.push({ name: 'plantSeed', params: { x: 2, y: 5 } });
+    }
+
+    return actions;
+};
+
+const player1 = new Player(0, algorithm1);
+const player2 = new Player(1, algorithm2);
+environment.addPlayer(player1);
+environment.addPlayer(player2);
 console.log({ environment: environment });
 
 // plantSeed
@@ -31,3 +44,6 @@ console.log({ environment: environment });
 
 // init
 // action = {name: init, params: {x: x, y: y }}
+
+//buyTree
+//action = {name: buyTree, params: {type: type} }}
