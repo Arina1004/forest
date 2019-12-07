@@ -65,4 +65,6 @@ export function getShadow(field, sun) {
       }
     }
   }
+
+  return res;
 }

@@ -16,7 +16,7 @@ const Cell = item => (
                 (item.coord[1] === 4 && item.coord[0] >= 1 && item.coord[0] <= 4),
             'cell-fertility-high': item.coord[0] >= 2 && item.coord[0] <= 3 && item.coord[1] >= 2 && item.coord[1] <= 3
         })}>
-        {item.player !== -1 && item.type !== CELL_CONTENT_EMPTY && <Tree player={item.player} type={item.type} />}
+        {item.player !== -1 && <Tree player={item.player} type={item.type} />}
     </div>
 );
 

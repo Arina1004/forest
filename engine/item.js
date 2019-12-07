@@ -31,35 +31,35 @@ export class Item {
     }
     get(type) {
         if (type === CELL_CONTENT_SEED) {
-            return getSeed();
+            return this.getSeed();
         } else if (type === CELL_CONTENT_LARGE) {
-            return getLarge();
+            return this.getLarge();
         } else if (type === CELL_CONTENT_MEDIUM) {
-            return getMedium();
+            return this.getMedium();
         } else {
-            return getSmall();
+            return this.getSmall();
         }
     }
     dec(type) {
         if (type === CELL_CONTENT_SEED) {
-            return decSeed();
+            return this.decSeed();
         } else if (type === CELL_CONTENT_LARGE) {
-            return decLarge();
+            return this.decLarge();
         } else if (type === CELL_CONTENT_MEDIUM) {
-            return decMedium();
+            return this.decMedium();
         } else {
-            return decSmall();
+            return this.decSmall();
         }
     }
     inc(type) {
         if (type === CELL_CONTENT_SEED) {
-            return incSeed();
+            return this.incSeed();
         } else if (type === CELL_CONTENT_LARGE) {
-            return incLarge();
+            return this.incLarge();
         } else if (type === CELL_CONTENT_MEDIUM) {
-            return incMedium();
+            return this.incMedium();
         } else {
-            return incSmall();
+            return this.incSmall();
         }
     }
 

@@ -85,13 +85,16 @@ export class Environment {
     }
 
     initTree(x, y, player) {
+        console.log(this.field.content[0]);
+        console.log('tree-2', nextUpdate, this.field.content[y][x], x, y);
         if (
-            this.field.content[y][x].type === CELL_CONTENT_EMPTY &&
-            this.players[player].inventory.get(nextUpdate[CELL_CONTENT_SEED]) > 0 &&
+            (this.field.content[y][x].type === CELL_CONTENT_EMPTY || this.field.content[y][x].type === undefined) &&
+            this.players[player].inventory.get(nextUpdate["CELL_CONTENT_SEED"]) > 0 &&
             getFertility(x, y) === 1
         ) {
-            this.field.content[y][x].set(nextUpdate[CELL_CONTENT_SEED], x, y, player);
-            this.players[player].inventory.dec(nextUpdate[CELL_CONTENT_SEED]);
+            console.log("OOOOOOOOO");
+            this.field.content[y][x].set(nextUpdate["CELL_CONTENT_SEED"], x, y, player);
+            this.players[player].inventory.dec(nextUpdate["CELL_CONTENT_SEED"]);
 
             return 'COMPLETE';
         }
@@ -130,13 +133,13 @@ export class Environment {
             }
         }
 
-        console.log(this.players);
-
         for (let player of this.players) {
             // actions =[{action: func,params:{}}]
             console.log(player);
             const actions = player.algorithm(this.field, player.id, player.getParams(), this.mode, this.sun);
+            console.log('ect', actions)
             for (let action of actions) {
+                console.log('in acti');
                 this.doAction(action, player);
             }
             if (player.points >= 10) {
@@ -152,25 +155,40 @@ export class Environment {
 
     doAction(action, player) {
         // action ={name: func,params:{}}
+        console.log('name', action.name);
+        if (action.name == 'initTree') {
+            console.log('tree', this.field)
+            this.initTree(action.params.x, action.params.y, player.id);
+            console.log('tree', this.field)
+        }
+        else if (action.name == 'plantSeed') {
+            console.log('seed', this.field);
+            this.plantSeed(action.params.x, action.params.y, action.params.parent, player.id);
+            console.log('seed', this.field);
+        }
         switch (action.name) {
             case 'sell':
-                this.sell(action.params.x, action.params.y, player);
+                this.sell(action.params.x, action.params.y, player.id);
                 break;
 
             case 'upgrade':
-                this.upgrade(action.params.x, action.params.y, player);
+                this.upgrade(action.params.x, action.params.y, player.id);
                 break;
 
             case 'plantSeed':
-                this.plantSeed(action.params.x, action.params.y, action.params.parent, player);
+                console.log('seed', this.field);
+                this.plantSeed(action.params.x, action.params.y, action.params.parent, player.id);
+                console.log('seed', this.field);
                 break;
 
             case 'initTree':
-                this.initTree(action.params.x, action.params.y, player);
+                console.log('tree', this.field)
+                this.initTree(action.params.x, action.params.y, player.id);
+                console.log('tree', this.field)
                 break;
 
             case 'buyTree':
-                this.buyTree(action.params.type, player);
+                this.buyTree(action.params.type, player.id);
                 break;
 
             default:

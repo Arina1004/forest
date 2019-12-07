@@ -6,15 +6,19 @@ import Field from '../Field/Field';
 import {getEnv} from '../../engine/index';
 
 const Layout = () => {
+  const [it, setIt] = React.useState(0);
     const environment =getEnv();
-    console.log(environment);
+    console.log("");
     return <div>
         <div className="layout-root">
-            <Field content={environment.getState().field} />
-            <PlayersPanel cards={environment.getState().players} />
+            <Field it={it} content={environment.getState().field} />
+            <PlayersPanel it={it} cards={environment.getState().players} />
         </div>
         <div className="layout-button-root">
-            <button className="layout-button" onClick={() => environment.step()}>Step</button>
+            <button className="layout-button" onClick={() => {
+              environment.step();
+              setIt(it+1);
+              }}>Step</button>
         </div>
     </div>
 };

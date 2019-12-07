@@ -10,7 +10,7 @@ function algorithm1(field, player, params, mode, sun) {
     if (mode === 'INIT') {
         actions.push({ name: 'initTree', params: { x: 1, y: 0 } });
     } else {
-        actions.push({ name: 'plantSeed', params: { x: 2, y: 1 } });
+        actions.push({ name: 'plantSeed', params: { x: 2, y: 1, parent: field.content[0][1] } });
     }
 
     return actions;
@@ -19,9 +19,9 @@ function algorithm2(field, player, params, mode, sun)  {
     const actions = [];
 
     if (mode === 'INIT') {
-        actions.push({ name: 'initTree', params: { x: 1, y: 6 } });
+        actions.push({ name: 'initTree', params: { x: 1, y: 5 } });
     } else {
-        actions.push({ name: 'plantSeed', params: { x: 2, y: 5 } });
+        actions.push({ name: 'plantSeed', params: { x: 2, y: 5, parent: field.content[0][1] } });
     }
 
     return actions;
