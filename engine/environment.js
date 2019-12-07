@@ -20,6 +20,8 @@ export class Environment {
         this.players = [];
         this.tick = 0;
         this.sun = 0;
+        this.blockedCells = [];
+        this.mode = 'INIT';
     }
 
     addPlayer(name) {
@@ -47,7 +49,7 @@ export class Environment {
         ) {
             const radius = plantRadius[parent.type];
 
-            if (Math.abs(x - parent.x) <= radius && Math.abs(y - parent.y) <= radius && ) {
+            if (Math.abs(x - parent.x) <= radius && Math.abs(y - parent.y) <= radius) {
                 if (this.players[player].energy >= prices[CELL_CONTENT_SEED]) {
                     this.players[player].energy -= prices[CELL_CONTENT_SEED];
                     this.players[player].inventory.inc(CELL_CONTENT_SEED);
@@ -83,16 +85,18 @@ export class Environment {
     }
 
     initTree(x, y, player) {
-        if (this.field.content[y][x].type === CELL_CONTENT_EMPTY &&
-            this.players[player].inventory.get(nextUpdate[CELL_CONTENT_SEED]) > 0
-            && getFertility(x, y) === 1) {
+        if (
+            this.field.content[y][x].type === CELL_CONTENT_EMPTY &&
+            this.players[player].inventory.get(nextUpdate[CELL_CONTENT_SEED]) > 0 &&
+            getFertility(x, y) === 1
+        ) {
             this.field.content[y][x].set(nextUpdate[CELL_CONTENT_SEED], x, y, player);
             this.players[player].inventory.dec(nextUpdate[CELL_CONTENT_SEED]);
 
-            return "COMPLETE"
+            return 'COMPLETE';
         }
 
-        return "ERROR"
+        return 'ERROR';
     }
 
     sell(x, y, player) {
@@ -128,7 +132,7 @@ export class Environment {
 
         for (let player of this.players) {
             // actions =[{action: func,params:{}}]
-            const actions = player.algorithm(this.field, player.getParams());
+            const actions = player.algorithm(this.field, player.id, player.getParams(), this.mode, this.sun);
             for (let action of actions) {
                 doAction(action, player);
             }
@@ -136,7 +140,7 @@ export class Environment {
                 return player.id;
             }
         }
-
+        this.mode = 'GAME';
         this.tick = this.tick + 1;
         this.sun = (this.sun + 1) % 4;
 
@@ -160,18 +164,23 @@ export class Environment {
 
             case 'initTree':
                 this.initTree(action.params.x, action.params.y, player);
+                break;
+
+            case 'buyTree':
+                this.buyTree(action.params.type, player);
+                break;
 
             default:
                 break;
         }
     }
 
-    getState(){
+    getState() {
         return {
             field: this.field,
             sun: this.sun,
             players: this.players,
             tick: this.tick
-        }
+        };
     }
 }
