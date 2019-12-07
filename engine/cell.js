@@ -8,7 +8,7 @@ export class Cell {
         this.type = type;
         this.x = x;
         this.y = y;
-        this.player = player ? player : -1;
+        this.player = player !== undefined ? player : -1;
     }
 
 }

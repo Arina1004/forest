@@ -21,7 +21,7 @@ function algorithm2(field, player, params, mode, sun)  {
     if (mode === 'INIT') {
         actions.push({ name: 'initTree', params: { x: 1, y: 5 } });
     } else {
-        actions.push({ name: 'plantSeed', params: { x: 2, y: 5, parent: field.content[0][1] } });
+        actions.push({ name: 'plantSeed', params: { x: 2, y: 5, parent: field.content[5][1] } });
     }
 
     return actions;
@@ -34,7 +34,7 @@ environment.addPlayer(player1);
 environment.addPlayer(player2);
 
 player1.algorithm = algorithm1;
-player2.algorithm2 = algorithm2;
+player2.algorithm = algorithm2;
 console.log( player2);
 
 // plantSeed

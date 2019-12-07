@@ -85,7 +85,6 @@ export class Environment {
     }
 
     initTree(x, y, player) {
-        console.log(this.field.content[0]);
         console.log('tree-2', nextUpdate, this.field.content[y][x], x, y);
         if (
             (this.field.content[y][x].type === CELL_CONTENT_EMPTY || this.field.content[y][x].type === undefined) &&
