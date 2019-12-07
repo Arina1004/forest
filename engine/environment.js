@@ -2,7 +2,7 @@ import { Field } from './field';
 import { Player } from './player';
 import { TSunPosition } from '../types/enums';
 
-class Environment {
+export class Environment {
     constructor() {
         this.field = new Field();
         this.players = [];
@@ -10,7 +10,15 @@ class Environment {
         this.sun = 0;
     }
 
-    addPlayer(name){
-        this.players.push(new Player(name))
+    addPlayer(player) {
+        this.players.push(player);
+    }
+
+    step() {
+        for (let player of this.players) {
+            const action = player.algorithm(this.field, player.getParams());
+        }
+        this.tick = this.tick + 1;
+        this.sun = (this.sun + 1) % 4;
     }
 }

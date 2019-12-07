@@ -1,7 +1,14 @@
 import { Environment } from './environment';
+import { Player } from './player';
 console.log('Hello from engien');
 
 const environment = new Environment();
 
-const playerCode = () => console.log('Algrorithm');
-environment.addPlayer(playerCode);
+const algorithm = () => console.log('Algrorithm');
+const player = new Player(0, algorithm);
+environment.addPlayer(player);
+console.log({ environment: environment });
+
+algoritm(field, player){
+return Action;
+}

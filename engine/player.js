@@ -11,7 +11,9 @@ import {
     CELL_CONTENT_LARGE
 } from '../types/enums';
 export class Player {
-    constructor() {
+    constructor(id, algorithm) {
+        this.id = id;
+        this.algoritm = algorithm;
         this.points = 0;
         this.energy = 0;
         this.store = new Item('store');
@@ -27,5 +29,14 @@ export class Player {
                 this.energy = this.energy - price;
             }
         }
+    }
+
+    getParams() {
+        return {
+            points: this.points,
+            energy: this.energy,
+            store: this.store.getParams(),
+            inventory: this.inventory.getParams()
+        };
     }
 }
