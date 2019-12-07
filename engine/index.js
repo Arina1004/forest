@@ -29,6 +29,7 @@ function algorithm2(field, player, params, mode, sun)  {
 
 const player1 = new Player(0, algorithm1);
 const player2 = new Player(1, algorithm2);
+console.log(player1);
 environment.addPlayer(player1);
 environment.addPlayer(player2);
 
@@ -50,3 +51,7 @@ console.log( player2);
 
 //buyTree
 //action = {name: buyTree, params: {type: type} }}
+
+export const getEnv = () => {
+    return environment;
+}

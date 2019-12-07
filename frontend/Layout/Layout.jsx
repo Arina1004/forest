@@ -3,9 +3,11 @@ import './Layout.scss';
 import PlayersPanel from '../PlayersPanel/PlayersPanel.jsx';
 import Field from '../Field/Field';
 
-import {environment} from '../../engine/index';
+import {getEnv} from '../../engine/index';
 
 const Layout = () => {
+    const environment =getEnv();
+    console.log(environment);
     return <div>
         <div className="layout-root">
             <Field content={environment.getState().field} />
