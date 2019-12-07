@@ -3,9 +3,9 @@ import './PlayerPanel.scss';
 
 const PlayerPanel = ({ card }) => (
     <div className="playerPanel-root">
-        <h1 className="playerPanel-title">{`Игрок № ${card.player}`}</h1>
+        <h1 className="playerPanel-title">{`PLAYER № ${card.player}`}</h1>
         <div className="resourses">
-            <h2 className="playerPanel-title-h2">Магазин</h2>
+            <h2 className="playerPanel-title-h2">SHOP</h2>
             <div className="resources-shop">
                 <div className="shop-item">
                     <div className={`shop-title-${card.player}-b`} />
@@ -26,7 +26,7 @@ const PlayerPanel = ({ card }) => (
             </div>
         </div>
         <div className="resourses">
-            <h2 className="playerPanel-title-h2">Инвентарь</h2>
+            <h2 className="playerPanel-title-h2">GREENHOUSE</h2>
             <div className="resources-shop">
                 <div className="shop-item">
                     <div className={`shop-title-${card.player}-b`} />
@@ -48,7 +48,7 @@ const PlayerPanel = ({ card }) => (
         </div>
         <div>
             <h2 className="playerPanel-title-h2">
-                Солнце: {card.sun} Очки: {card.points}
+                SUN: {card.sun} POINTS: {card.points}
             </h2>
         </div>
     </div>

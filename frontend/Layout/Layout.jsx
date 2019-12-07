@@ -12,7 +12,7 @@ const Layout = () => (
             <PlayersPanel cards={cards} />
         </div>
         <div className="layout-button-root">
-            <button className="layout-button">Шаг</button>
+            <button className="layout-button">Step</button>
         </div>
     </div>
 );

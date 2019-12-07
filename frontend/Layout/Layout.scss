@@ -1,8 +1,3 @@
-@font-face {
-    font-family: 'VT323';
-    src: url(https://fonts.googleapis.com/css?family=VT323);
-}
-
 .layout-root {
     display: flex;
 }
@@ -14,8 +9,8 @@
 }
 
 .layout-button {
-    font-family: 'VT323';
-    background: #881400;
+    font-family: 'VT323', monospace;
+    background: #005800;
     border-bottom: 6px inset rgba(0, 0, 0, 0.5);
     border-left: 6px inset rgba(0, 0, 0, 0.5);
     border-right: 6px inset rgba(255, 255, 255, 0.5);
@@ -33,6 +28,6 @@
 
     &:focus,
     &:hover {
-        background: #a81000;
+        background: #006800;
     }
 }
