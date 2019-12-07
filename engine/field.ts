@@ -1,4 +1,4 @@
 import { Cell } from './cell';
 export class Field {
-    content: Array<Array<ICell>>;
+    content: Array<Array<Cell>>;
 }
