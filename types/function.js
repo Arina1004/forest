@@ -1,5 +1,5 @@
 import { SIZE_FIELD, shadows, SUN_POSITION_TOP, SUN_POSITION_RIGHT, SUN_POSITION_BOTTOM, SUN_POSITION_LEFT } from '../types/enums';
-export const SIZE_FIELD = 6;
+
 export function getFertility(x, y) {
   if (x <= 3 && x >= 2 && y <= 3 && y >= 2) {
     return 3;
