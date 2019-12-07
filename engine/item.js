@@ -1,4 +1,14 @@
-import { SIZE_FIELD,SUN_POSITION_TOP,SUN_POSITION_RIGHT,SUN_POSITION_BOTTOM, SUN_POSITION_LEFT,CELL_CONTENT_SEED,CELL_CONTENT_SMALL,CELL_CONTENT_MEDIUM,CELL_CONTENT_LARGE} from '../types/enums';
+import {
+    SIZE_FIELD,
+    SUN_POSITION_TOP,
+    SUN_POSITION_RIGHT,
+    SUN_POSITION_BOTTOM,
+    SUN_POSITION_LEFT,
+    CELL_CONTENT_SEED,
+    CELL_CONTENT_SMALL,
+    CELL_CONTENT_MEDIUM,
+    CELL_CONTENT_LARGE
+} from '../types/enums';
 export class Item {
     constructor(mode) {
         this.mode = mode;
@@ -20,58 +30,37 @@ export class Item {
         }
     }
     get(type) {
-      if type === CELL_CONTENT_SEED{
-        return getSeed();
-
-      }
-      else if type === CELL_CONTENT_LARGE{
-        return getLarge();
-
-      }
-      else if type === CELL_CONTENT_MEDIUM {
-        return getMedium();
-
-          }
-      else
-      {
-        return getSmall();
-      }
+        if (type === CELL_CONTENT_SEED) {
+            return getSeed();
+        } else if (type === CELL_CONTENT_LARGE) {
+            return getLarge();
+        } else if (type === CELL_CONTENT_MEDIUM) {
+            return getMedium();
+        } else {
+            return getSmall();
+        }
     }
     dec(type) {
-      if type === CELL_CONTENT_SEED{
-        return decSeed();
-
-      }
-      else if type === CELL_CONTENT_LARGE{
-        return decLarge();
-
-      }
-      else if type === CELL_CONTENT_MEDIUM{
-        return decMedium();
-
-          }
-      else
-      {
-        return decSmall();
-      }
+        if (type === CELL_CONTENT_SEED) {
+            return decSeed();
+        } else if (type === CELL_CONTENT_LARGE) {
+            return decLarge();
+        } else if (type === CELL_CONTENT_MEDIUM) {
+            return decMedium();
+        } else {
+            return decSmall();
+        }
     }
     inc(type) {
-      if type === CELL_CONTENT_SEED{
-        return incSeed();
-
-      }
-      else if type === CELL_CONTENT_LARGE{
-        return incLarge();
-
-      }
-      else if type === CELL_CONTENT_MEDIUM{
-        return incMedium();
-
-          }
-      else
-      {
-        return incSmall();
-      }
+        if (type === CELL_CONTENT_SEED) {
+            return incSeed();
+        } else if (type === CELL_CONTENT_LARGE) {
+            return incLarge();
+        } else if (type === CELL_CONTENT_MEDIUM) {
+            return incMedium();
+        } else {
+            return incSmall();
+        }
     }
 
     getSeed() {
@@ -107,7 +96,12 @@ export class Item {
     incMedium() {
         return this.medium + 1;
     }
+
     incSmall() {
         return this.small + 1;
+    }
+
+    getParams() {
+        return { seeds: this.seeds, large: this.large, medium: this.medium, small: this.small };
     }
 }

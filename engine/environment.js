@@ -62,4 +62,12 @@ class Environment {
         return "ERROR"
     }
 
+	step() {
+        for (let player of this.players) {
+            const action = player.algorithm(this.field, player.getParams());
+        }
+        this.tick = this.tick + 1;
+        this.sun = (this.sun + 1) % 4;
+    }
+
 }
