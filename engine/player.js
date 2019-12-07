@@ -13,7 +13,7 @@ import {
 export class Player {
     constructor(id, algorithm) {
         this.id = id;
-        this.algoritm = algorithm;
+        this.algorithm = algorithm;
         this.points = 0;
         this.energy = 0;
         this.store = new Item('store');

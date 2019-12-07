@@ -2,9 +2,9 @@ import { Environment } from './environment';
 import { Player } from './player';
 console.log('Hello from engien');
 
-const environment = new Environment();
+export const environment = new Environment();
 
-const algorithm1 = (field, player, params, mode, sun) => {
+function algorithm1(field, player, params, mode, sun) {
     const actions = [];
 
     if (mode === 'INIT') {
@@ -15,7 +15,7 @@ const algorithm1 = (field, player, params, mode, sun) => {
 
     return actions;
 };
-const algorithm2 = (field, player, params, mode, sun) => {
+function algorithm2(field, player, params, mode, sun)  {
     const actions = [];
 
     if (mode === 'INIT') {
@@ -31,7 +31,10 @@ const player1 = new Player(0, algorithm1);
 const player2 = new Player(1, algorithm2);
 environment.addPlayer(player1);
 environment.addPlayer(player2);
-console.log({ environment: environment });
+
+player1.algorithm = algorithm1;
+player2.algorithm2 = algorithm2;
+console.log( player2);
 
 // plantSeed
 // action = {name: plantSeed, params: {x: x, y: y, parent: parent}}

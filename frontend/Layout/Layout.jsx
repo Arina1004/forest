@@ -1,20 +1,20 @@
 import React from 'react';
-import content from '../Layout/data';
-import cards from '../Layout/cards';
 import './Layout.scss';
 import PlayersPanel from '../PlayersPanel/PlayersPanel.jsx';
 import Field from '../Field/Field';
 
-const Layout = () => (
-    <div>
+import {environment} from '../../engine/index';
+
+const Layout = () => {
+    return <div>
         <div className="layout-root">
-            <Field content={content} />
-            <PlayersPanel cards={cards} />
+            <Field content={environment.getState().field} />
+            {/* <PlayersPanel cards={environment.getState().players} /> */}
         </div>
         <div className="layout-button-root">
-            <button className="layout-button">Step</button>
+            <button className="layout-button" onClick={() => environment.step()}>Step</button>
         </div>
     </div>
-);
+};
 
 export default Layout;

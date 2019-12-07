@@ -130,8 +130,11 @@ export class Environment {
             }
         }
 
+        console.log(this.players);
+
         for (let player of this.players) {
             // actions =[{action: func,params:{}}]
+            console.log(player);
             const actions = player.algorithm(this.field, player.id, player.getParams(), this.mode, this.sun);
             for (let action of actions) {
                 doAction(action, player);
