@@ -98,9 +98,15 @@ export class Environment {
             for (let action of actions) {
                 doAction(action, player);
             }
+            if (player.points >= 10) {
+                return player.id;
+            }
         }
+
         this.tick = this.tick + 1;
         this.sun = (this.sun + 1) % 4;
+
+        return -1;
     }
 
     doAction(action, player) {
