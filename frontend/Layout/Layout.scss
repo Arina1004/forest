@@ -1,0 +1,38 @@
+@font-face {
+    font-family: 'VT323';
+    src: url(https://fonts.googleapis.com/css?family=VT323);
+}
+
+.layout-root {
+    display: flex;
+}
+
+.layout-button-root {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.layout-button {
+    font-family: 'VT323';
+    background: #881400;
+    border-bottom: 6px inset rgba(0, 0, 0, 0.5);
+    border-left: 6px inset rgba(0, 0, 0, 0.5);
+    border-right: 6px inset rgba(255, 255, 255, 0.5);
+    border-top: 6px inset rgba(255, 255, 255, 0.5);
+    box-sizing: border-box;
+    color: white;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 2.2rem;
+    margin: 1rem;
+    min-width: 200px;
+    padding: 0.5rem;
+    text-transform: uppercase;
+    width: auto;
+
+    &:focus,
+    &:hover {
+        background: #a81000;
+    }
+}

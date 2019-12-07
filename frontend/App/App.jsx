@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Field from '../Field/Field';
-import content from './data';
+import Layout from '../Layout/Layout';
 
-const App = () => <Field content={content} />;
+const App = () => <Layout />;
 
 export default App;
