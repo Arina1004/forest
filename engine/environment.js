@@ -70,6 +70,8 @@ export class Environment {
         return 'ERROR';
     }
 
+    initTree(x, y, palyer) {}
+
     sell(x, y, player) {
         if (
             this.field.content[y][x].type === CELL_CONTENT_LARGE &&
@@ -107,12 +109,18 @@ export class Environment {
             case 'sell':
                 sell(action.params, player);
                 break;
+
             case 'upgrade':
-                upgrade(params, player);
+                upgrade(action.params, player);
                 break;
+
             case 'plantSeed':
-                upgrade(params, player);
+                upgrade(action.params, player);
                 break;
+
+            case 'initTree':
+                initTree(action.params, player);
+
             default:
                 break;
         }
