@@ -19,6 +19,7 @@ export class Environment {
         this.tick = 0;
         this.sun = 0;
         this.blockedCells = [];
+        this.mode = "INIT";
     }
 
     addPlayer(name) {
@@ -104,7 +105,7 @@ export class Environment {
     step() {
         for (let player of this.players) {
             // actions =[{action: func,params:{}}]
-            const actions = player.algorithm(this.field, player.getParams());
+            const actions = player.algorithm(this.field, player.id player.getParams(), this.mode, this.sun);
             for (let action of actions) {
                 doAction(action, player);
             }
@@ -112,7 +113,7 @@ export class Environment {
                 return player.id;
             }
         }
-
+        this.mode = "GAME";
         this.tick = this.tick + 1;
         this.sun = (this.sun + 1) % 4;
 
