@@ -8,7 +8,3 @@ const algorithm = () => console.log('Algrorithm');
 const player = new Player(0, algorithm);
 environment.addPlayer(player);
 console.log({ environment: environment });
-
-algoritm(field, player){
-return Action;
-}
